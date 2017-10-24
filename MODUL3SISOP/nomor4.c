@@ -39,3 +39,48 @@ void *tulis(void *ptr)
 	status =1;
 	return NULL;
 }
+
+void *baca(void *ptr)
+{
+    while(status==0);
+    for(i=0; i<3; i++)
+    {
+        for(j=0; j<nomor[i];j++)
+        {
+            hasil= hasil*(j+1);
+        }
+        stack[i]=hasil;
+        hasil=1;
+    }
+
+    int flag, temp;
+    for(i=0; i<3; i++)
+    {
+        flag = 1;
+        for(j=3-1; j>i; j--)
+        {
+            if(stack[j] < stack[j-1])
+            {
+                temp =stack[j];
+                stack[j]=stack[j-1];
+                stack[j-1]=temp;
+                flag = 0;
+            }
+        }
+        if(flag==1) break;
+    }
+
+    for(i=0; i<3; i++)
+    {
+        printf("Hasil dari %d! = %d \n", nomor[i],stack[i]);
+    }
+}
+
+int main()
+{
+    pthread_create(&t1, NULL, &tulis, NULL);
+    pthread_create(&t2, NULL, &baca, NULL);
+
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+}
