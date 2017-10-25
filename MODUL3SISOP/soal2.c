@@ -35,3 +35,13 @@ else if(b==1)
 	getchar();
 	continue;
 }
+psg_ranjau_1:
+	system("clear");
+	printf("Lubang yang sudah ada ranjaunya : ");
+	for(a=0;a<16;a++)
+	{
+		if(ranjau1[a] == 1)
+		{
+			printf("%d ", a+1);
+		}
+	}
