@@ -13,7 +13,16 @@ int status;
 
 void* lohan()
 {
-
+	while(1)
+	{
+		sleep(10);
+		stt_lohan-=15;
+		if(stt_lohan > 100 || stt_lohan <=0)
+			{
+				status=1;
+				break;
+			}
+	}
 }
 
 void* kepiting()
