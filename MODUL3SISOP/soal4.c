@@ -1,86 +1,90 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
-int i=1;
-int nomor[4];
-pthread_t t1;
-pthread_t t2;
-pthread_mutex_t lock;
+pthread_t trd[101];
 int status=0;
-int hasil=1;
-int stack[4];
-int j=1;
 
-void *tulis(void *ptr)
+typedef struct arg_struct
 {
-	status = 0;
-	printf("Masukkan angka ");
-	for(i=0; i<3;i++)
-	{
-		scanf("%d", &nomor[i]);
-	}
+    int angka;
+    int stat;
+    
+}args;
 
-	int flag, temp;
-	for(i=0; i<3; i++)
-    {
-        flag = 1;
-        for(j=3-1; j>i; j--)
+
+void* faktorial(void *komentar)
+{
+    int a,b;
+    struct arg_struct *args = (struct arg_struct *)komentar;
+    while(args->stat != status)
+    {}
+    int input =args->angka;
+
+    //hitung faktorial
+    int hasil=1;
+    for(b=input; b>1; b--)
         {
-            if(nomor[j] < nomor[j-1])
-            {
-                temp =nomor[j];
-                nomor[j]=nomor[j-1];
-                nomor[j-1]=temp;
-                flag = 0;
-            }
+            hasil=hasil*b;
         }
-        if(flag==1) break;
-    }
-	status =1;
-	return NULL;
+        printf("%d! = %d \n", input, hasil);
+        status++;
+        free(komentar);
 }
 
-void *baca(void *ptr)
+int main(int argc, char *argv[])
 {
-    while(status==0);
-    for(i=0; i<3; i++)
+    int a, b, j,i;
+    int input[101];
+
+    //cek argv
+    if (argc<2)
     {
-        for(j=0; j<nomor[i];j++)
-        {
-            hasil= hasil*(j+1);
-        }
-        stack[i]=hasil;
-        hasil=1;
+        printf("Gagal!");
+        exit(1);
     }
 
-    int flag, temp;
-    for(i=0; i<3; i++)
-    {
-        flag = 1;
-        for(j=3-1; j>i; j--)
+    //mengubah string ke int
+    for(a=1; a<argc; a++)
         {
-            if(stack[j] < stack[j-1])
+            input[a-1]=atoi(argv[a]);
+        }
+
+    printf(" Hasil faktorial : \n");
+
+    //bubble sort
+    argc--;
+    int temp=0;
+    for(i=1; i<argc; i++)
+    {
+        //flag = 1;
+        for(j=1; j<argc; j++)
+        {
+            if(input[j-1] >= input[j])
             {
-                temp =stack[j];
-                stack[j]=stack[j-1];
-                stack[j-1]=temp;
-                flag = 0;
+                temp =input[j-1];
+                input[j-1]=input[j];
+                input[j]=temp;
+                //flag = 0;
             }
         }
-        if(flag==1) break;
+        //if(flag==1) break;
     }
 
-    for(i=0; i<3; i++)
+    for(a=0; a<argc; a++)
     {
-        printf("Hasil dari %d! = %d \n", nomor[i],stack[i]);
+        struct arg_struct *args = malloc(sizeof(struct arg_struct));
+        args->angka = input[a];
+        args->stat =a;
+
+        pthread_create(&trd[a], NULL, faktorial, (void*)args);
     }
-}
 
-int main()
-{
-    pthread_create(&t1, NULL, &tulis, NULL);
-    pthread_create(&t2, NULL, &baca, NULL);
+    for(a=0; a<argc;a++)
+    {
+        pthread_join(trd[a],NULL);
+    }
 
-    pthread_join(t1, NULL);
-    pthread_join(t2, NULL);
+    return 0;
 }
