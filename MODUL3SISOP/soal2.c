@@ -294,3 +294,66 @@ for(a=0;a<4;a++)
 }
 }
 
+for(a=0;a<4;a++)
+	{
+		if(ranjau1[e[a]] == 1)
+		{
+			nilai1 += 1;
+		}
+		else
+		{
+			nilai2 += 1;
+		}
+	}
+	if(nilai1 >= 10)
+	{
+		status=1;
+		break;
+	}
+	if(nilai >= 10)
+	{
+		status=2;
+		break;
+	}
+	system("clear");
+	printf("<<<<<----- HASIL PERTANDINGAN ----->>>>>\n");
+	printf("%s: %d\n", nama_p_1, nilai1);
+	printf("%s: %d\n", nama_p_2, nilai2);
+	printf("Press any key untuk continue...\n");
+	getchar();
+	getchar();
+	b = 1;
+	giliran = 1;
+	continue;
+	}
+}
+}
+
+int main()
+{
+	system("clear");
+	pthread_create(&(pemain1), NULL, &pemainpertama, NULL);
+	pthread_create(&(pemain2), NULL, &pemainkedua, NULL);
+
+	while(1)
+	{
+		if(status == 1)
+		{
+			system("clear");
+			printf("SELAMAT, %s MEMENANGKAN PERTANDINGAN INI!!!\n\n", nama_p_1);
+			printf("<<<<<----- HASIL PERTANDINGAN ----->>>>>\n");
+			printf("%s: %d\n", nama_p_1, nilai1);
+			printf("%s: %d\n", nama_p_2, nilai2);
+			return 0;
+		}
+		else if(status == 2)
+		{
+			system("clear");
+			printf("SELAMAT, %s MEMENANGKAN PERTANDINGAN INI!!!\n\n", nama_p_2);
+			printf("<<<<<----- HASIL PERTANDINGAN ----->>>>>\n");
+			printf("%s: %d\n", nama_p_1, nilai1);
+			printf("%s: %d\n", nama_p_2, nilai2);
+			return 0;
+		}
+	}
+}
