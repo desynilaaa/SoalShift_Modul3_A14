@@ -225,4 +225,37 @@ psg_ranjau_2:
 	giliran = 1;
 	continue;
 }
-
+else if(b==2)
+	{
+		tebak_ranjau_2:
+		printf("Hai %s, Silahkan tebak ranjau yang disimpan di 4 lubang (1-16)\n", nama_p_2);
+		for(a=0;a<4;a++)
+		{
+			scanf("%d", &e[a]);
+			e[a] = e[a] - 1;
+			if(e[a] >= 16 || e[a]<0)
+			{
+				printf("Lubang tidak tersedia, coba lagi\n");
+				getchar();
+				getchar();
+				system("clear");
+				goto tebak_ranjau_2;
+			}
+		}
+		for(a=0;a<4;a++)
+		{
+			for(c=0;c<4;c++)
+			{
+				if(a==c)
+				{
+					continue;
+				}
+				if(e[a] == e[c]){
+				printf("Silahkan cari lubang lain, jangan lubang yang sama!");
+				getchar();
+				getchar();
+				system("clear");
+				goto tebak_ranjau_2;
+			}
+		}
+	}
