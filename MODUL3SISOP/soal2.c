@@ -167,5 +167,62 @@ void* pemainkedua()
 				getchar();
 				continue;
 			}
-
+psg_ranjau_2:
+	system("clear");
+	printf("Lubang yang sudah ada ranjaunya : ");
+	for(a=0;a<16;a++)
+	{
+		if(ranjau2[a] == 1)
+		{
+			printf("%d ", a+1);
+		}
+	}
+	printf("\nMau pasang ranjau di lubang ke berapa? (1-16)\n");
+	for(a=0;a<c;a++)
+	{
+		scanf("%d", &d[a]);
+		d[a] = d[a] - 1;
+		if(d[a]>=16 || d[a]<0)
+		{
+			printf("Lubang yang akan dimasukkan tidak tersedia, silahkan coba lagi\n");
+			getchar();
+			getchar();
+			goto psg_ranjau_2;
+		}
+	}
+	for(a=0;a<c;a++)
+	{
+		for(f=0;f<c;f++)
+		{
+			if(a==f)
+			{
+				continue;
+			}
+			if(d[a] == d[f])
+			{
+				printf("Ranjau tidak bisa dipasang ke tempat yang sama, coba lagi\n");
+				getchar();
+				getchar();
+				goto psg_ranjau_2;
+			}
+		}
+	}
+	for(a=0;a<c;a++)
+	{
+		if(ranjau2[d[a]] != 1)
+		{
+			ranjau2[d[a]] = 1;
+		}
+		else
+		{
+			printf("Ranjau tidak bisa dipasang ke tempat yang sama, coba lagi\n");
+			getchar();
+			getchar();
+			goto psg_ranjau_2;
+		}
+	}
+	b = 2;
+	giliran = 1;
+	continue;
+}
 
