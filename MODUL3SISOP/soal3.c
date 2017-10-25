@@ -1,93 +1,75 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 #include <pthread.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-pthread_t trd_lohan;
-pthread_t trd_kepiting;
-pthread_t trd_input;
+pthread_t thmenu, thtambah, thkurang1, thkurang2;
+int stt_lohan=100,stt_kepiting=100,pilihan;
 
-int stt_kepiting=100;
-int stt_lohan=100;
-int status=0;
-
-void* lohan()
+void *menu()
 {
-	while(1)
+	printf ("1.Beri makan lohan =%d\n",stt_lohan);
+	printf ("2.Beri makan kepiting =%d\n",stt_kepiting);
+	printf ("Mau memberi makan siapa?  ");
+	scanf("%d",&pilihan);
+	printf("-------------\n");
+	if (stt_lohan<=50)
 	{
-		sleep(10);
-		stt_lohan-=15;
-		if(stt_lohan > 100 || stt_lohan <=0)
-		{
-			status=1;
-			break;
-		}
+		printf("lohan sudah lapar\n");
+	}
+	else 
+	{
+		printf("lohan masih kenyang\n");
+	}
+
+	if (stt_kepiting<=50)
+	{
+		printf ("kepiting sudah lapar\n");
+	}
+	else 
+	{
+		printf("kepiting masih kanyang\n");
 	}
 }
-
-void* kepiting()
+void *kurang1()
 {
-	while(1)
-	{
-		sleep(20);
-		stt_kepiting-=10;
-		if(stt_kepiting > 100 || stt_lohan <=0)
-		{
-			status=1;
-			break;
-
-		}
-	}
-
+	sleep(10);
+	stt_lohan -=15;
 }
 
-void* masuk()
+void *kurang2()
 {
-	int pilihan;
-	while(1)
+	sleep(20);
+	stt_kepiting -=20;
+}
+
+void *tambah()
+{
+	if (pilihan==1)
 	{
-		printf("1. Beri makan lohan.\n");
-		printf("2. Beri makan kepiting\n");
-		printf("Masukan pilihan Anda ");
-
-		system("clear");
-		if(pilihan==1)
-		{
-			stt_lohan +=10;
-			if(stt_lohan > 100 || stt_lohan <=0)
-			{
-				status=1;
-				break;
-			}
-		}
-		else if(pilihan==2)
-		{
-			stt_kepiting += 10;
-			if(stt_kepiting > 100 || stt_kepiting <= 0)
-			{
-				status=1;
-				break;
-			}
-
-		}
-	}
+ 		stt_lohan +=10;
+ 	}
+	else if (pilihan==2)
+	{
+ 		stt_kepiting +=10;
+ 	}
 }
 
 int main()
 {
-	system("clear");
-	pthread_create(&(trd_lohan), NULL, &lohan, NULL);
-	pthread_create(&(trd_kepiting), NULL, &kepiting, NULL);
-	pthread_create(&(trd_input), NULL, &masuk, NULL);
-
 	while(1)
 	{
-		if(status==1)
+		pthread_create(&(thmenu),NULL,&menu,NULL);
+		pthread_create(&(thkurang1),NULL,&kurang1,NULL);
+		pthread_create(&(thkurang2),NULL,&kurang2,NULL);
+		pthread_create(&(thtambah),NULL,&tambah,NULL);
+		if((stt_lohan<=0||stt_lohan>100)||(stt_kepiting<=0||stt_kepiting>100))
 		{
-			system("clear");
-			printf("GAME OVER\n");
-			return 0;
+			printf("\n GAME OVER! \n"); 
+			break;
 		}
-	
+		pthread_join(thmenu,NULL);
 	}
 }
