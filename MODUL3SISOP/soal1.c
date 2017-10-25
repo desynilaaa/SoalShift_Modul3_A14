@@ -36,3 +36,36 @@ int main()
 	getchar();
 	getchar();
 }
+else if(n == 2)
+{
+	system("clear");
+	printf("Format input [Nama barang] [Jumlah stok]\n");
+	scanf("%s %d", pil_senjata, &jml);
+	for(a=0;a<6;a++)
+	{
+		if(strcmp(pil_senjata, senjata_tersedia[a]) == 0)
+		{
+			if(stock[a] < jml)
+			{
+				printf("Barang di stok tidak cukup\n");
+				printf("Press any key to continue...\n");
+				getchar();
+				getchar();
+				break;
+			}
+			stock[a] -= jml;
+			break;
+		}
+	}
+}
+else if(n == 3)
+{
+	system("clear");
+	printf("EXIT\n");
+	shmdt(stock);
+	shmctl(shmid, IPC_RMID, NULL);
+	break;
+}
+}
+return 0;
+}
