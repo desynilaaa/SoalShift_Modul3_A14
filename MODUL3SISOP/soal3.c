@@ -27,7 +27,17 @@ void* lohan()
 
 void* kepiting()
 {
-	
+	while(1)
+	{
+		sleep(20);
+		stt_kepiting-=10;
+		if(stt_kepiting > 100 || stt_lohan <=0)
+		{
+			status=1;
+			break;
+
+		}
+	}
 }
 
 int main()
