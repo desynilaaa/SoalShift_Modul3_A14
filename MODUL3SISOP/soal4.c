@@ -1,86 +1,69 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
+#include <unistd.h>
 
-int i=1;
-int nomor[4];
-pthread_t t1;
-pthread_t t2;
-pthread_mutex_t lock;
+pthread_t trd[101];
 int status=0;
-int hasil=1;
-int stack[4];
-int j=1;
 
-void *tulis(void *ptr)
+
+void* faktorial(void *argu)
 {
-	status = 0;
-	printf("Masukkan angka ");
-	for(i=0; i<3;i++)
-	{
-		scanf("%d", &nomor[i]);
-	}
-
-	int flag, temp;
-	for(i=0; i<3; i++)
-    {
-        flag = 1;
-        for(j=3-1; j>i; j--)
-        {
-            if(nomor[j] < nomor[j-1])
-            {
-                temp =nomor[j];
-                nomor[j]=nomor[j-1];
-                nomor[j-1]=temp;
-                flag = 0;
-            }
-        }
-        if(flag==1) break;
-    }
-	status =1;
-	return NULL;
+    
 }
 
-void *baca(void *ptr)
+int main(int argc, char *argv[])
 {
-    while(status==0);
-    for(i=0; i<3; i++)
+    int a, b, j,i;
+    int input[101];
+
+    //cek argv
+    if (argv<2)
     {
-        for(j=0; j<nomor[i];j++)
-        {
-            hasil= hasil*(j+1);
-        }
-        stack[i]=hasil;
-        hasil=1;
+        printf("Gagal!");
+        exit(1);
     }
 
-    int flag, temp;
-    for(i=0; i<3; i++)
+    //mengubah string ke int
+    for(a=1; a<argc; a++)
+        {
+            input[a-1]=atoi(argv[a]);
+        }
+
+    printf(" Hasil faktoorial : \n");
+
+    //bubble sort
+    argc--;
+
+    for(i=0; i<argc; i++)
     {
         flag = 1;
-        for(j=3-1; j>i; j--)
+        for(j=n-1; j>argc; j--)
         {
-            if(stack[j] < stack[j-1])
+            if(arr[j] < arr[j-1])
             {
-                temp =stack[j];
-                stack[j]=stack[j-1];
-                stack[j-1]=temp;
+                temp =arr[j];
+                arr[j]=arr[j-1];
+                arr[j-1]=temp;
                 flag = 0;
             }
         }
         if(flag==1) break;
     }
 
-    for(i=0; i<3; i++)
+    for(a=0; a<argc; a++)
     {
-        printf("Hasil dari %d! = %d \n", nomor[i],stack[i]);
+        struct arg_struct *args = malloc(sizeof(struct arg_struct));
+        args->angka = input[a];
+        args->stat =a;
+
+        pthread_create(&trd[a], NULL, faktorial, (void*)args);
     }
-}
 
-int main()
-{
-    pthread_create(&t1, NULL, &tulis, NULL);
-    pthread_create(&t2, NULL, &baca, NULL);
+    for(a=0; a<args;a++)
+    {
+        pthread_join(trd[a],NULL);
+    }
 
-    pthread_join(t1, NULL);
-    pthread_join(t2, NULL);
+    return 0;
 }
