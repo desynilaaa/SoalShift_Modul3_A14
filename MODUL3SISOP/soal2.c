@@ -281,10 +281,10 @@ for(a=0;a<4;a++)
 		break;
 	}
 	system("clear");
-	printf("[SCORE]\n");
+	printf("<<<<<----- HASIL PERTANDINGAN ----->>>>>\n");
 	printf("%s: %d\n", nama_p_1, nilai1);
 	printf("%s: %d\n", nama_p_2, nilai2);
-	printf("Klik tombol apapun untuk melanjutkan...\n");
+	printf("Press any key untuk continue...\n");
 	getchar();
 	getchar();
 	b = 1;
