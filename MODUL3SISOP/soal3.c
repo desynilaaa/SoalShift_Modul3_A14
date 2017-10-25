@@ -5,7 +5,7 @@
 
 pthread_t trd_lohan;
 pthread_t trd_kepiting;
-pthread_t input;
+pthread_t trd_input;
 
 int stt_kepiting=100;
 int stt_lohan=100;
@@ -40,7 +40,7 @@ void* kepiting()
 	}
 }
 
-void* input()
+void* masuk()
 {
 	int pilihan;
 	while(1)
@@ -77,7 +77,7 @@ int main()
 	system("clear");
 	pthread_create(&(trd_lohan), NULL, &lohan, NULL);
 	pthread_create(&(trd_kepiting), NULL, &kepiting, NULL);
-	pthread_create(&(trd_input), NULL, &input, NULL);
+	pthread_create(&(trd_input), NULL, &masuk, NULL);
 
 	while(1)
 	{
