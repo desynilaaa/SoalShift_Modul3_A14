@@ -259,3 +259,38 @@ else if(b==2)
 			}
 		}
 	}
+for(a=0;a<4;a++)
+	{
+		if(ranjau1[e[a]] == 1)
+		{
+			nilai1 += 1;
+		}
+		else
+		{
+			nilai2 += 1;
+		}
+	}
+	if(nilai1 >= 10)
+	{
+		status=1;
+		break;
+	}
+	if(nilai >= 10)
+	{
+		status=2;
+		break;
+	}
+	system("clear");
+	printf("[SCORE]\n");
+	printf("%s: %d\n", nama_p_1, nilai1);
+	printf("%s: %d\n", nama_p_2, nilai2);
+	printf("Klik tombol apapun untuk melanjutkan...\n");
+	getchar();
+	getchar();
+	b = 1;
+	giliran = 1;
+	continue;
+	}
+}
+}
+
