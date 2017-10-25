@@ -7,7 +7,7 @@
 void *print_message_function( void *ptr );
 void *print_message_function2( void *ptr );
 
-int num =0;
+int num =0, num2=0;
 char word[20], word2[20];
 char string[30];
 
@@ -65,7 +65,6 @@ void *print_message_function( void *ptr )
 	}
 
 	printf("%s : %d \n",word,num );
-	num=0;
 }
 
 
@@ -87,8 +86,8 @@ void *print_message_function2( void *ptr )
 	{
 	    fscanf(in_file,"%s",string);
 	    if(!strcmp(string,word2))//if match found increment num
-	    num++;
+	    num2++;
 	}
 
-	printf("%s : %d \n",word2,num );
+	printf("%s : %d \n",word2,num2 );
 }
