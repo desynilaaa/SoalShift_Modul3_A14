@@ -137,4 +137,35 @@ else if(b==2)
 }
 }
 }
+void* pemainkedua()
+	{
+		int a, b=0, c, d[4], e[4], f;
+		for(a=0;a<16;a++){
+		ranjau2[a] = 0;
+	}
+	while(1)
+	{
+		while(giliran!=2){}
+		system("clear");
+		if(b==0)
+		{
+			printf("Nama pemain kedua:\n");
+			scanf("%s", nama_p_2);
+			b=1;
+			giliran = 1;
+			continue;
+		}
+		else if(b==1)
+		{
+			printf("Hai %s, Silahkan pasang ranjau anda\n", nama_p_2);
+			printf("Mau pasang ranjau berapa (maksimal 4 ranjau)?\n");
+			scanf("%d", &c);
+			if(c>4 || c<=0)
+			{
+				printf("Ranjau yang dipasang terlalu banyak, maksimal 4 ranjau\n");
+				getchar();
+				getchar();
+				continue;
+			}
+
 
