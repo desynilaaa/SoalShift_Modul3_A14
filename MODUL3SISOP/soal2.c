@@ -24,3 +24,14 @@ while(1)
 	giliran = 2;
 	continue;
 }
+else if(b==1)
+{
+	printf("Hai %s, Silahkan pasang ranjau anda\n", nama_p_1);
+	printf("Mau pasang ranjau berapa (maksimal 4 ranjau)? \n");
+	scanf("%d", &c);
+	if(c>4 || c<=0){
+	printf("Ranjau yang dipasang terlalu banyak, maksimal 4 ranjau\n");
+	getchar();
+	getchar();
+	continue;
+}
