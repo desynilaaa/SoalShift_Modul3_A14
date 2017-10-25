@@ -49,7 +49,7 @@ void* masuk()
 		printf("2. Beri makan kepiting\n");
 		printf("Masukan pilihan Anda ");
 
-		system(clear);
+		system("clear");
 		if(pilihan==1)
 		{
 			stt_lohan +=10;
