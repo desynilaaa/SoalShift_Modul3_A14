@@ -45,3 +45,16 @@ psg_ranjau_1:
 			printf("%d ", a+1);
 		}
 	}
+	printf("\nMau pasang ranjau di lubang ke berapa? (1-16)\n");
+	for(a=0;a<c;a++)
+	{
+		scanf("%d", &d[a]);
+		d[a] = d[a] - 1;
+		if(d[a]>=16 || d[a]<0)
+		{
+			printf("Lubang yang akan dimasukkan tidak tersedia, silahkan coba lagi\n");
+			getchar();
+			getchar();
+			goto psg_ranjau_1;
+		}
+	}
