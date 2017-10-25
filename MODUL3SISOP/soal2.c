@@ -58,3 +58,83 @@ psg_ranjau_1:
 			goto psg_ranjau_1;
 		}
 	}
+	for(a=0;a<c;a++)
+	{
+		for(f=0;f<c;f++)
+		{	
+			if(a==f)
+			{
+				continue;
+			}
+			if(d[a] == d[f])
+				{
+				printf("Ranjau tidak bisa dipasang ke tempat yang sama, coba lagi\n");
+				getchar();
+				getchar();
+				goto psg_ranjau_1;
+			}
+		}
+	}
+else if(b==2)
+{
+	tebak_ranjau_1:
+	printf("Hai %s, Silahkan tebak ranjau yang disimpan di 4 lubang (1-16)\n", nama_p_1);
+	for(a=0;a<4;a++)
+	{
+		scanf("%d", &e[a]);
+		e[a] = e[a] - 1;
+		if(e[a] >= 16 || e[a] < 0)
+		{
+			printf("Lubang tidak tersedia, coba lagi\n");
+			getchar();
+			getchar();
+			system("clear");
+			goto tebak_ranjau_1;
+		}
+	}
+	for(a=0;a<4;a++)
+	{
+		for(c=0;c<4;c++)
+		{
+			if(a == c)
+			{
+				continue;
+			}
+			if(e[a] == e[c])
+			{
+				printf("Silahkan cari lubang lain, jangan lubang yang sama!");
+				getchar();
+				getchar();
+				system("clear");
+				goto tebak_ranjau_1;
+			}
+		}
+	}
+	for(a=0;a<4;a++)
+	{
+		if(ranjau2[e[a]] == 1)
+		{
+			nilai2 += 1;
+		}
+		else
+		{
+			nilai1 += 1;
+		}
+	}
+	if(nilai1 >= 10)
+	{
+		status=1;
+		break;
+	}
+	if(nilai2 >= 10)
+	{
+		status=2;
+		break;
+	}
+	b = 1;
+	giliran = 2;
+	continue;
+}
+}
+}
+
