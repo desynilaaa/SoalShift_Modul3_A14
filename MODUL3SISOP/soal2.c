@@ -13,3 +13,14 @@ void* pemainpertama()
 	for(a=0;a<16;a++){
 	ranjau1[a] = 0;
 }
+while(1)
+{
+	while(giliran!=1){}
+	system("clear");
+	if(b==0){
+	printf("Nama pemain pertama:\n");
+	scanf("%s", nama_p_1);
+	b=1;
+	giliran = 2;
+	continue;
+}
