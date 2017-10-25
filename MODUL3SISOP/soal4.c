@@ -6,10 +6,31 @@
 pthread_t trd[101];
 int status=0;
 
-
-void* faktorial(void *argu)
+typedef struct arg_struct
 {
+    int angka;
+    int stat;
     
+}args;
+
+
+void* faktorial(void *komentar)
+{
+    int a,b;
+    struct arg_struct *args = (struct arg_struct *)komentar;
+    while(args->stat != status)
+    {}
+    int input =args->angka;
+
+    //hitung faktorial
+    int hasil=1;
+    for(b=input; b>1; b--)
+        {
+            hasil=hasil*b;
+        }
+        printf("%d! = %d \n", input, hasil);
+        status++;
+        free(komentar);
 }
 
 int main(int argc, char *argv[])
@@ -18,7 +39,7 @@ int main(int argc, char *argv[])
     int input[101];
 
     //cek argv
-    if (argv<2)
+    if (argc<2)
     {
         printf("Gagal!");
         exit(1);
@@ -30,25 +51,25 @@ int main(int argc, char *argv[])
             input[a-1]=atoi(argv[a]);
         }
 
-    printf(" Hasil faktoorial : \n");
+    printf(" Hasil faktorial : \n");
 
     //bubble sort
     argc--;
-
-    for(i=0; i<argc; i++)
+    int temp=0;
+    for(i=1; i<argc; i++)
     {
-        flag = 1;
-        for(j=n-1; j>argc; j--)
+        //flag = 1;
+        for(j=1; j<argc; j++)
         {
-            if(arr[j] < arr[j-1])
+            if(input[j-1] >= input[j])
             {
-                temp =arr[j];
-                arr[j]=arr[j-1];
-                arr[j-1]=temp;
-                flag = 0;
+                temp =input[j-1];
+                input[j-1]=input[j];
+                input[j]=temp;
+                //flag = 0;
             }
         }
-        if(flag==1) break;
+        //if(flag==1) break;
     }
 
     for(a=0; a<argc; a++)
@@ -60,7 +81,7 @@ int main(int argc, char *argv[])
         pthread_create(&trd[a], NULL, faktorial, (void*)args);
     }
 
-    for(a=0; a<args;a++)
+    for(a=0; a<argc;a++)
     {
         pthread_join(trd[a],NULL);
     }
